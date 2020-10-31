@@ -20,7 +20,8 @@ impl FontLoader {
             id: 0,
         }
     }
-    pub fn load_font(&mut self, path: &str) {
+
+    pub fn set_size_from_name(&mut self, path: &str) {
         let start = path.rfind('_').unwrap_or(0);
         let end = path.rfind('.').unwrap_or(0);
         if start > 0 && end > 0 {
@@ -32,6 +33,10 @@ impl FontLoader {
             self.char_width = 0;
             self.char_height = 0;
         }
+    }
+
+    pub fn load_font(&mut self, path: &str) {
+        self.set_size_from_name(path);
         if let Ok(id) = self.loader.load_file(path) {
             self.id = id;
             self.load_font_async();
@@ -50,7 +55,7 @@ impl FontLoader {
         false
     }
 
-    fn load_font_bytes(&mut self, buf: &[u8]) {
+    pub fn load_font_bytes(&mut self, buf: &[u8]) {
         let mut img = image::load_from_memory(buf).unwrap().to_rgba();
         self.process_image(&mut img);
         self.img = Some(img);

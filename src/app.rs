@@ -11,8 +11,8 @@ use crate::input::{DoryenInput, InputApi};
 use crate::program::{set_texture_params, Program};
 
 // shaders
-const DORYEN_VS: &str = include_str!("doryen_vs.glsl");
-const DORYEN_FS: &str = include_str!("doryen_fs.glsl");
+pub const DORYEN_VS: &str = include_str!("doryen_vs.glsl");
+pub const DORYEN_FS: &str = include_str!("doryen_fs.glsl");
 
 // fps
 const MAX_FRAMESKIP: i32 = 5;
